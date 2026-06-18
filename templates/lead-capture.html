@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dormir bien no es un lujo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(160deg, #f0f9ff 0%, #e0f2fe 100%);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px;
+    }
+    .wrapper { max-width: 520px; width: 100%; }
+    .client-name { font-size: 0.75rem; font-weight: 700; color: #0284c7; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    h1 { font-size: 2.2rem; font-weight: 800; color: #0c4a6e; margin-bottom: 16px; line-height: 1.2; }
+    .description { font-size: 1rem; color: #075985; line-height: 1.6; margin-bottom: 36px; }
+    .form-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); padding: 32px; }
+    .field { margin-bottom: 18px; }
+    label { display: block; font-size: 0.82rem; font-weight: 600; color: #334155; margin-bottom: 6px; }
+    input, textarea {
+      width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 6px;
+      font-size: 0.95rem; color: #0f172a; outline: none;
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    .submit {
+      width: 100%; background: #0284c7; color: #fff;
+      font-size: 1rem; font-weight: 700; border: none; border-radius: 8px;
+      padding: 14px; cursor: pointer; margin-top: 8px;
+    }
+    .privacy { text-align: center; font-size: 0.75rem; color: #94a3b8; margin-top: 16px; }
+    .privacy a { color: #0284c7; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <p class="client-name">SuenoSimple</p>
+    <h1>Dormir bien no es un lujo</h1>
+    <p class="description">Suscribite y recibí ofertas exclusivas antes que nadie. Solo por tiempo limitado.</p>
+    <div class="form-card">
+      <div class="field"><label>Nombre</label><input type="text" placeholder="Tu nombre completo"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="tu@email.com"></div>
+      <div class="field"><label>Teléfono (opcional)</label><input type="tel" placeholder="11 1234 5678"></div>
+      <div class="field"><label>Mensaje (opcional)</label><textarea placeholder="¿En qué podemos ayudarte?"></textarea></div>
+      <button class="submit">Quiero ofertas</button>
+      <p class="privacy">Al enviar aceptás nuestra <a href="https://suenosimple.com/privacidad">política de privacidad</a></p>
+    </div>
+  </div>
+</body>
+</html>
