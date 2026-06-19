@@ -78,7 +78,7 @@ const productLaunchHtml = `<!DOCTYPE html>
     <h1>{{productName}}</h1>
     <p class="description">{{productDescription}}</p>
     <div class="pricing">
-      <p class="original-price">Antes: ${{originalPrice}}</p>
+      <p class="original-price">Antes: \${{originalPrice}}</p>
       <p class="current-price"><span class="currency">$</span>{{price}}</p>
     </div>
     <a href="{{ctaUrl}}" class="cta">{{ctaText}}</a>
