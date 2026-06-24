@@ -4,7 +4,17 @@ const templateService = require('./templateService')
 function getAllLandings() {
   return db.landings.map(landing => ({
     ...landing,
-    leadCount: 0
+    leadCount: db.leads.filter(l => l.landingId === landing.id).length
+  }))
+}
+
+function getLeadsSummary() {
+  return db.landings.map(landing => ({
+    id: landing.id,
+    name: landing.name,
+    client: landing.client,
+    status: landing.status,
+    leadCount: db.leads.filter(l => l.landingId === landing.id).length
   }))
 }
 
@@ -73,4 +83,12 @@ function createLead(landingId, data) {
   return lead
 }
 
-module.exports = { getAllLandings, getLandingById, createLanding, getLandingPreview, getLeadsByLanding, createLead }
+module.exports = {
+  getAllLandings,
+  getLeadsSummary,
+  getLandingById,
+  createLanding,
+  getLandingPreview,
+  getLeadsByLanding,
+  createLead
+}

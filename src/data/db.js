@@ -1,5 +1,5 @@
 const db = {
-  nextLandingId: 5,
+  nextLandingId: 7,
   nextLeadId: 4,
   landings: [
     {
@@ -63,6 +63,34 @@ const db = {
         heroImageUrl: 'https://via.placeholder.com/1200x400'
       },
       createdAt: '2026-04-12T11:00:00.000Z'
+    },
+    {
+      id: 5,
+      templateId: 3,
+      name: 'Mundial 2026 - SueñoSimple',
+      client: 'SuenoSimple',
+      status: 'draft',
+      fields: {
+        title: 'Descansá como un campeón',
+        description: 'Registrate para recibir alertas exclusivas cada vez que juegue la selección y accedé a precios de fábrica antes que nadie.',
+        ctaText: 'Quiero mi descuento mundial',
+        privacyUrl: 'https://suenosimple.com/privacidad'
+      },
+      createdAt: '2026-05-01T10:00:00.000Z'
+    },
+    {
+      id: 6,
+      templateId: 3,
+      name: 'Día de las Madres - SueñoSimple',
+      client: 'SuenoSimple',
+      status: 'draft',
+      fields: {
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        ctaText: 'Ver promoción',
+        privacyUrl: 'https://suenosimple.com/privacidad'
+      },
+      createdAt: '2026-05-10T09:00:00.000Z'
     }
   ],
   leads: [

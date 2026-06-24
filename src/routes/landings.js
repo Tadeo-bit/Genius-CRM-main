@@ -28,6 +28,41 @@ router.get('/', (req, res, next) => {
 
 /**
  * @swagger
+ * /api/landings/summary:
+ *   get:
+ *     summary: Resumen de leads por landing
+ *     tags: [Landings]
+ *     responses:
+ *       200:
+ *         description: Lista resumida de landings con cantidad de leads
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   name:
+ *                     type: string
+ *                   client:
+ *                     type: string
+ *                   status:
+ *                     type: string
+ *                   leadCount:
+ *                     type: integer
+ */
+router.get('/summary', (req, res, next) => {
+  try {
+    res.json(landingService.getLeadsSummary())
+  } catch (err) {
+    next(err)
+  }
+})
+
+/**
+ * @swagger
  * /api/landings/{id}:
  *   get:
  *     summary: Obtener una landing por ID
