@@ -5,8 +5,8 @@ const db = {
     {
       id: 1,
       templateId: 1,
-      name: 'Hot Sale 2026 - SuenoSimple',
-      client: 'SuenoSimple',
+      name: 'Hot Sale 2026 - SueñoSimple',
+      client: 'SueñoSimple',
       status: 'active',
       fields: {
         title: 'Hot Sale 2026',
@@ -22,7 +22,7 @@ const db = {
       id: 2,
       templateId: 2,
       name: 'Lanzamiento Economica Pro 2026',
-      client: 'SuenoSimple',
+      client: 'SueñoSimple',
       status: 'active',
       fields: {
         productName: 'Colchon Economica Pro',
@@ -37,8 +37,8 @@ const db = {
     {
       id: 3,
       templateId: 3,
-      name: 'Captacion leads - Newsletter SuenoSimple',
-      client: 'SuenoSimple',
+      name: 'Captacion leads - Newsletter SueñoSimple',
+      client: 'SueñoSimple',
       status: 'draft',
       fields: {
         title: 'Dormir bien no es un lujo',
@@ -68,7 +68,7 @@ const db = {
       id: 5,
       templateId: 3,
       name: 'Mundial 2026 - SueñoSimple',
-      client: 'SuenoSimple',
+      client: 'SueñoSimple',
       status: 'draft',
       fields: {
         title: 'Descansá como un campeón',
@@ -82,7 +82,7 @@ const db = {
       id: 6,
       templateId: 3,
       name: 'Día de las Madres - SueñoSimple',
-      client: 'SuenoSimple',
+      client: 'SueñoSimple',
       status: 'draft',
       fields: {
         title: 'TITLE',
