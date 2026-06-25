@@ -57,6 +57,7 @@ function getLandingPreview(id) {
   })
 
   html = html.replace(/\{\{clientName\}\}/g, landing.client || '')
+  html = html.replace(/\{\{client\}\}/g, landing.client || '')
 
   return html
 }
