@@ -91,7 +91,21 @@ const db = {
         privacyUrl: 'https://suenosimple.com/privacidad'
       },
       createdAt: '2026-05-10T09:00:00.000Z'
-    }
+    },
+    {
+      id: 7,
+      templateId: 4,
+      name: '9 de julio - SueñoSimple',
+      client: 'SueñoSimple',
+      status: 'draft',
+      fields: {
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        ctaText: 'Ver promoción',
+        privacyUrl: 'https://suenosimple.com/privacidad'
+      },
+      createdAt: '2026-07-01T11:00:00.000Z'
+    },
   ],
   leads: [
     {
