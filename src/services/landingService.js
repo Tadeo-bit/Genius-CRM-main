@@ -67,6 +67,18 @@ function getLeadsByLanding(landingId) {
   return db.leads.filter(l => l.landingId === Number(landingId))
 }
 
+function updateLandingStatus(id, newStatus) {
+  const VALID_STATUSES = ['active', 'draft', 'inactive']
+  if (!VALID_STATUSES.includes(newStatus)) {
+    const err = new Error(`Invalid status: ${newStatus}`)
+    err.statusCode = 400
+    throw err
+  }
+  const landing = getLandingById(id)
+  landing.status = newStatus
+  return landing
+}
+
 function createLead(landingId, data) {
   getLandingById(landingId)
 
@@ -91,5 +103,6 @@ module.exports = {
   createLanding,
   getLandingPreview,
   getLeadsByLanding,
-  createLead
+  createLead,
+  updateLandingStatus
 }

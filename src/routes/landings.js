@@ -261,4 +261,48 @@ router.post('/:id/leads', (req, res, next) => {
   }
 })
 
+/**
+ * @swagger
+ * /api/landings/{id}/status:
+ *   patch:
+ *     summary: Cambiar el estado de una landing
+ *     tags: [Landings]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [status]
+ *             properties:
+ *               status:
+ *                 type: string
+ *                 enum: [active, draft, inactive]
+ *     responses:
+ *       200:
+ *         description: Estado actualizado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Landing'
+ *       400:
+ *         description: Status inválido
+ *       404:
+ *         description: Landing no encontrada
+ */
+router.patch('/:id/status', (req, res, next) => {
+  try {
+    const landing = landingService.updateLandingStatus(req.params.id, req.body.status)
+    res.json(landing)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

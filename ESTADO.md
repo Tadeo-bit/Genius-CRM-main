@@ -117,3 +117,28 @@ npm start          # producción
 
 - 8 endpoints operativos: `GET /landings`, `GET /landings/summary`, `GET /landings/:id`, `POST /landings`, `GET /landings/:id/preview`, `GET /landings/:id/leads`, `POST /landings/:id/leads`, `GET /templates`.
 - 6 landings de prueba precargadas, `nextLandingId = 7`.
+
+---
+
+### 2026-07-01 — Agrega landing id=7 en db (commit `fb90110`)
+
+- `src/data/db.js`: nueva landing `id=7` — "9 de julio - SueñoSimple", `client: 'SueñoSimple'`, `status: 'draft'`, `templateId: 4`, `createdAt: 2026-07-01`.
+- `nextLandingId` pasa a 8.
+
+---
+
+### 2026-07-03 — Endpoint PATCH /landings/:id/status
+
+**Cambios realizados**
+
+- `src/services/landingService.js`: nueva función `updateLandingStatus(id, newStatus)`. Valida que el status sea `active`, `draft` o `inactive` (lanza 400 si es inválido). Muta el objeto en memoria y lo devuelve. Lanza 404 si el ID no existe.
+- `src/routes/landings.js`: nuevo endpoint `PATCH /api/landings/:id/status` con documentación Swagger. Delega en `landingService.updateLandingStatus`.
+
+**Motivo**
+
+El admin de Genius-Landings intentaba llamar `PUT /api/landings/{id}` para cambiar estado, pero ese endpoint no existía. Se creó el endpoint correcto y se alineó la llamada del admin.
+
+**Estado funcional actual**
+
+- 9 endpoints operativos: los 8 anteriores + `PATCH /landings/:id/status`.
+- Requiere reinicio del servidor para activar el nuevo endpoint.
