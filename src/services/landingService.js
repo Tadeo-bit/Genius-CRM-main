@@ -75,7 +75,9 @@ function updateLandingStatus(id, newStatus) {
     throw err
   }
   const landing = getLandingById(id)
+  const prevStatus = landing.status
   landing.status = newStatus
+  console.log(`[VIS-08] PATCH /landings/${id}/status → Estado actualizado | name='${landing.name}' ${prevStatus} → ${newStatus}`)
   return landing
 }
 
