@@ -1,5 +1,5 @@
 const db = {
-  nextLandingId: 7,
+  nextLandingId: 8,
   nextLeadId: 4,
   landings: [
     {
