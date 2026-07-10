@@ -3,6 +3,8 @@ const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const templateRoutes = require('./routes/templates')
 const landingRoutes = require('./routes/landings')
+const historyRoutes = require('./routes/history')
+const { auditLandings } = require('./middleware/auditMiddleware')
 const errorHandler = require('./middleware/errorHandler')
 
 const app = express()
@@ -10,7 +12,7 @@ const app = express()
 // Integración leads: permitir peticiones desde las landing pages estáticas
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
   if (req.method === 'OPTIONS') return res.sendStatus(204)
   next()
@@ -99,7 +101,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.get('/openapi.json', (req, res) => res.json(swaggerSpec))
 
 app.use('/api/templates', templateRoutes)
+app.use('/api/landings', auditLandings())
 app.use('/api/landings', landingRoutes)
+app.use('/api/history', historyRoutes)
 
 app.use(errorHandler)
 
