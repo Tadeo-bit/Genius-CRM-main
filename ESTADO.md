@@ -18,11 +18,11 @@ API REST (Landing CRM) para la creación y gestión de landing pages a partir de
 
 | Campo | Valor |
 |---|---|
-| Rama actual | `main` |
+| Rama actual | `dev` |
 | Rama por defecto | `main` |
 | Cambios sin commitear | Ninguno (working tree limpio) |
-| Sincronización | Al día con `origin/main` |
-| Último commit | `b3cfb56 — fix: escape originalPrice placeholder in product template` |
+| Sincronización | Al día con `origin/dev` |
+| Último commit | `d6ecece — fix(crm): reemplaza {{client}} en preview de landings` |
 
 ## Estado funcional
 
@@ -85,3 +85,60 @@ npm start          # producción
 - `GET /api/landings/summary` responde 200.
 - `POST /api/landings` desde admin PHP crea landing en memoria con status `draft` y responde 201.
 - `GET /api/landings` lista 6 landings desde arranque limpio.
+
+---
+
+### 2026-06-25 — Fix: placeholder `{{client}}` no reemplazado en preview
+
+**Problema detectado**
+
+- `GET /api/landings/{id}/preview` devolvía el HTML del template con el literal `{{client}}` sin reemplazar. Solo se reemplazaba `{{clientName}}`.
+
+**Cambios realizados**
+
+- `src/services/landingService.js`, función `getLandingPreview`:
+  - Se agregó `html = html.replace(/\{\{client\}\}/g, landing.client || '')`.
+
+**Verificaciones**
+
+- `curl http://localhost:3000/api/landings/1/preview` devuelve `SueñoSimple` en lugar de `{{client}}`.
+
+---
+
+### 2026-06-25 — Verificación de endpoints de leads
+
+**Endpoints verificados operativos:**
+
+- `GET /api/landings/{id}/leads` → devuelve array de leads de la landing (vacío si no hay).
+- `POST /api/landings/{id}/leads` → registra un lead con campos `name`, `email`, `phone`, `message`; devuelve 201 con el objeto creado.
+- `GET /api/landings/999/leads` → devuelve 404 `"Landing not found: 999"` correctamente.
+
+**Estado funcional actual**
+
+- 8 endpoints operativos: `GET /landings`, `GET /landings/summary`, `GET /landings/:id`, `POST /landings`, `GET /landings/:id/preview`, `GET /landings/:id/leads`, `POST /landings/:id/leads`, `GET /templates`.
+- 6 landings de prueba precargadas, `nextLandingId = 7`.
+
+---
+
+### 2026-07-01 — Agrega landing id=7 en db (commit `fb90110`)
+
+- `src/data/db.js`: nueva landing `id=7` — "9 de julio - SueñoSimple", `client: 'SueñoSimple'`, `status: 'draft'`, `templateId: 4`, `createdAt: 2026-07-01`.
+- `nextLandingId` pasa a 8.
+
+---
+
+### 2026-07-03 — Endpoint PATCH /landings/:id/status
+
+**Cambios realizados**
+
+- `src/services/landingService.js`: nueva función `updateLandingStatus(id, newStatus)`. Valida que el status sea `active`, `draft` o `inactive` (lanza 400 si es inválido). Muta el objeto en memoria y lo devuelve. Lanza 404 si el ID no existe.
+- `src/routes/landings.js`: nuevo endpoint `PATCH /api/landings/:id/status` con documentación Swagger. Delega en `landingService.updateLandingStatus`.
+
+**Motivo**
+
+El admin de Genius-Landings intentaba llamar `PUT /api/landings/{id}` para cambiar estado, pero ese endpoint no existía. Se creó el endpoint correcto y se alineó la llamada del admin.
+
+**Estado funcional actual**
+
+- 9 endpoints operativos: los 8 anteriores + `PATCH /landings/:id/status`.
+- Requiere reinicio del servidor para activar el nuevo endpoint.

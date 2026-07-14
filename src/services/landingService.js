@@ -57,6 +57,7 @@ function getLandingPreview(id) {
   })
 
   html = html.replace(/\{\{clientName\}\}/g, landing.client || '')
+  html = html.replace(/\{\{client\}\}/g, landing.client || '')
 
   return html
 }
@@ -64,6 +65,20 @@ function getLandingPreview(id) {
 function getLeadsByLanding(landingId) {
   getLandingById(landingId)
   return db.leads.filter(l => l.landingId === Number(landingId))
+}
+
+function updateLandingStatus(id, newStatus) {
+  const VALID_STATUSES = ['active', 'draft', 'inactive']
+  if (!VALID_STATUSES.includes(newStatus)) {
+    const err = new Error(`Invalid status: ${newStatus}`)
+    err.statusCode = 400
+    throw err
+  }
+  const landing = getLandingById(id)
+  const prevStatus = landing.status
+  landing.status = newStatus
+  console.log(`[VIS-08] PATCH /landings/${id}/status → Estado actualizado | name='${landing.name}' ${prevStatus} → ${newStatus}`)
+  return landing
 }
 
 function createLead(landingId, data) {
@@ -90,5 +105,6 @@ module.exports = {
   createLanding,
   getLandingPreview,
   getLeadsByLanding,
-  createLead
+  createLead,
+  updateLandingStatus
 }
